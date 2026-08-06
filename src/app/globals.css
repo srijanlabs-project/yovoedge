@@ -1,0 +1,46 @@
+@import "tailwindcss";
+
+:root {
+  --ye-ink: #1c1b17;
+  --ye-ink-soft: #2a2820;
+  --ye-cream: #f4f1ea;
+  --ye-cream-2: #ece6d8;
+  --ye-paper: #faf8f3;
+  --ye-olive: #55603f;
+  --ye-olive-dark: #3c4530;
+  --ye-line: #ded7c4;
+  --ye-muted: #6b6555;
+}
+
+@theme inline {
+  --color-ink: var(--ye-ink);
+  --color-cream: var(--ye-cream);
+  --color-cream-2: var(--ye-cream-2);
+  --color-paper: var(--ye-paper);
+  --color-olive: var(--ye-olive);
+  --color-olive-dark: var(--ye-olive-dark);
+  --color-line: var(--ye-line);
+  --color-muted: var(--ye-muted);
+  --font-serif: "Playfair Display", Georgia, "Times New Roman", serif;
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--ye-paper);
+  color: var(--ye-ink);
+  font-family: var(--font-sans);
+}
+
+h1, h2, h3, .font-serif {
+  font-family: var(--font-serif);
+}
+
+.section-line {
+  width: 3rem;
+  height: 1px;
+  background: var(--ye-olive);
+}
