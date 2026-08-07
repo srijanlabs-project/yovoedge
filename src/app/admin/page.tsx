@@ -7,7 +7,7 @@ export default async function AdminPage() {
   const authed = await isAdminSession();
   if (!authed) redirect("/admin/login");
 
-  const rows = getAllSubmissions();
+  const rows = await getAllSubmissions();
 
   return (
     <div className="min-h-screen bg-cream">

@@ -31,7 +31,7 @@ export async function POST(req: NextRequest) {
     "unknown";
   const userAgent = req.headers.get("user-agent") || "unknown";
 
-  insertSubmission({
+  await insertSubmission({
     id,
     created_at: now,
     parent_name: data.parentName,
@@ -66,6 +66,6 @@ export async function GET(req: NextRequest) {
   if (!authed) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
-  const submissions = getAllSubmissions();
+  const submissions = await getAllSubmissions();
   return NextResponse.json({ submissions });
 }

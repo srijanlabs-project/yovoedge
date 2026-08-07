@@ -9,15 +9,14 @@ assumption, and what still needs a decision before this handles real families' d
 - **Next.js 16 (App Router, TypeScript)** — one codebase for pages, the intake form, and the API.
 - **Tailwind CSS 4** — styling, using a small custom theme (`src/app/globals.css`) matching the mockups'
   serif/olive/cream look.
-- **Plain JSON-lines file storage** (`data/submissions.jsonl`, created automatically, one submission per
-  line, `src/lib/db.ts`). Two earlier options were tried and dropped: Prisma (its engine binaries
-  couldn't be downloaded in the build sandbox) and better-sqlite3 (a native module — it needs node-gyp
-  plus a C++ toolchain to compile if no prebuilt binary matches your exact Node version/OS, which failed
-  on a Windows machine without Visual Studio Build Tools installed). Plain JSON-lines has zero native
-  dependencies and behaves identically on any OS or Node version. It's fine for an intake form's write
-  volume; it is not built for concurrent multi-process writers or real scale — swap for a hosted
-  database (Postgres, etc.) before this handles production traffic. `src/lib/db.ts` is a small,
-  self-contained module, so that swap only touches one file.
+- **Postgres** (`src/lib/db.ts`, via the `pg` client) — connects using the `DATABASE_URL` environment
+  variable. The `submissions` table is created automatically on first use (`CREATE TABLE IF NOT EXISTS`),
+  so there's no separate migration step to run. Two earlier options were tried and dropped before this:
+  Prisma (its engine binaries couldn't be downloaded in the build sandbox), better-sqlite3 (a native
+  module — needs node-gyp plus a C++ toolchain to compile, which failed on a Windows machine without
+  Visual Studio Build Tools), and a plain JSON-lines flat file (worked everywhere with zero native
+  dependencies, but isn't durable on hosts with an ephemeral filesystem — e.g. Railway wipes local disk
+  writes on every redeploy/restart). Postgres is the one meant to actually hold production data.
 - **Zod** — one schema (`src/lib/validation.ts`) used for both the client-side form validation and the
   server-side API validation, so the two can't drift apart.
 
@@ -28,8 +27,21 @@ npm install
 npm run dev       # http://localhost:3000
 ```
 
-Set `ADMIN_PASSWORD` and `SESSION_SECRET` in `.env.local` before using `/admin` for real (a starter
-`.env.local` is included with placeholder values — change them).
+Set `ADMIN_PASSWORD`, `SESSION_SECRET`, and `DATABASE_URL` in `.env.local` before running (a starter
+`.env.local` is included with placeholder values for the first two — change them; `DATABASE_URL` has no
+placeholder since it depends on your Postgres instance).
+
+### Deploying with a separate Postgres service (e.g. Railway)
+
+1. Provision a Postgres service (on Railway: "New" → "Database" → "PostgreSQL").
+2. In your app service's variables, add `DATABASE_URL` and set it to that Postgres service's connection
+   string (on Railway, reference it directly, e.g. `${{Postgres.DATABASE_URL}}`, so it stays in sync if
+   the value ever changes — don't hardcode the string).
+3. Deploy. The `submissions` table is created automatically the first time the app writes or reads —
+   nothing to run by hand.
+4. If your provider's connection needs TLS and it isn't already reflected in the connection string,
+   append `?sslmode=require` to the `DATABASE_URL` value — `pg` reads that directly, no code change
+   needed.
 
 ## Site map
 
@@ -69,9 +81,8 @@ Set `ADMIN_PASSWORD` and `SESSION_SECRET` in `.env.local` before using `/admin` 
 6. **A minimal internal admin view** (`/admin`) — the copy on the intake form promises "our team carefully
    reads your responses," but no internal tool was designed for that. This is intentionally basic
    (single shared password) — see "Before this goes further" below.
-7. Hero imagery is CSS gradients, not photography — the mockups use real photos we don't have licensed
-   copies of. Swap in real images by replacing the gradient `div`s in `src/components/Hero.tsx` and the
-   page files.
+7. Hero and section photography is extracted directly from the source mockups/PDF (`public/images/`),
+   not placeholder gradients.
 
 ## Data captured per submission
 
@@ -98,8 +109,9 @@ this holds real children's mental-health-adjacent data:
   per-person accounts with an audit log before then.
 - **Retention isn't automated.** The Privacy Note promises deletion ~24 months after the last session;
   nothing in this codebase currently enforces that on a schedule.
-- **No encryption-at-rest configuration, no backups, no hosting decision** — this runs on a local flat
-  file for development. Production needs a real database host, TLS, and a backup policy.
+- **No backup policy configured yet.** The app now writes to Postgres rather than a local flat file, but
+  whichever Postgres host you use, confirm its backup/point-in-time-recovery settings before this holds
+  real submissions — don't assume it's on by default.
 - **No practitioner-matching or profile-review screen** exists yet, even though `/finding-support` promises
   "you review profiles... and choose who feels like the right fit." Right now that step is implied to be
   manual (email), matching "a real person reads it" elsewhere in the copy.
