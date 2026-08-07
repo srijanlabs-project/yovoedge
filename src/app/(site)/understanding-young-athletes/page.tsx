@@ -1,6 +1,7 @@
 import { Hero } from "@/components/Hero";
 import { Container } from "@/components/Container";
 import { Footer } from "@/components/Footer";
+import { ExpandablePointer } from "@/components/ExpandablePointer";
 import Link from "next/link";
 
 const CHAPTERS = [
@@ -8,24 +9,71 @@ const CHAPTERS = [
     id: "competition",
     chapter: "Chapter I",
     title: "Competition",
-    quote: "Practice builds skill. Competition asks different questions.",
+    intro:
+      "Competition asks different questions than practice. When the stakes feel higher, some young athletes discover that performing under pressure is a skill in itself.",
     image: "/images/understanding-ch1-competition.jpg",
     items: [
       {
         title: "My child performs differently in competition.",
-        body: "They train confidently. They perform well in practice. Then competition arrives and something changes.",
+        lines: [
+          "They train confidently.",
+          "They perform well in practice.",
+          "Then competition arrives.",
+          "They hesitate.",
+          "Play safe.",
+          "Make uncharacteristic mistakes.",
+          "Leave the competition saying,",
+          "“I know I can play better than that.”",
+          "Many young athletes experience this at some point in their sporting journey.",
+          "The important question isn't whether it happens.",
+          "It's whether it becomes a recurring pattern.",
+        ],
       },
       {
         title: "One mistake changes everything.",
-        body: "A single error can feel bigger than the whole game. It lingers and affects what follows.",
+        lines: [
+          "The match begins well.",
+          "Then comes one mistake.",
+          "One missed shot.",
+          "One dropped catch.",
+          "One lost point.",
+          "From that moment, they don't seem like themselves.",
+          "The frustration grows.",
+          "Confidence fades.",
+          "The next mistake comes more easily than the first.",
+          "Every athlete makes mistakes.",
+          "Learning how to recover from them is often just as important as learning how to avoid them.",
+        ],
       },
       {
-        title: "They get nervous before competing.",
-        body: "They feel it in their stomach, their mind races, and it's hard to settle.",
+        title: "They get very nervous before competing.",
+        lines: [
+          "The nerves begin the night before.",
+          "Or during the drive.",
+          "Or while waiting to compete.",
+          "They worry about making mistakes.",
+          "Letting people down.",
+          "Not performing well enough.",
+          "By the time competition begins, they're already mentally exhausted.",
+          "Feeling nervous before competition is common.",
+          "The important question is whether those nerves are beginning to affect how your child experiences sport.",
+        ],
       },
       {
-        title: "They lose focus when pressure builds.",
-        body: "Distractions creep in. Their attention drifts. They find it hard to reset.",
+        title: "They lose focus when the pressure builds.",
+        lines: [
+          "Everything is going well.",
+          "Then something changes.",
+          "A mistake.",
+          "A close score.",
+          "A difficult opponent.",
+          "Instead of staying present, their attention drifts.",
+          "To the scoreboard.",
+          "To the last mistake.",
+          "To what might happen next.",
+          "Competition naturally demands focus.",
+          "Some athletes simply need support learning how to bring their attention back when pressure builds.",
+        ],
       },
     ],
   },
@@ -33,24 +81,60 @@ const CHAPTERS = [
     id: "confidence",
     chapter: "Chapter II",
     title: "Confidence",
-    quote: "Confidence rarely disappears overnight. It changes quietly.",
+    intro: "Confidence isn't fixed. It grows, changes and is constantly being shaped by experience.",
     image: "/images/understanding-ch2-confidence.jpg",
     items: [
       {
-        title: "Confidence disappears overnight.",
-        body: "One game, one period or one moment can shake their belief in themselves.",
+        title: "Their confidence seems to disappear overnight.",
+        lines: [
+          "Only a few weeks ago they believed in themselves.",
+          "Now they question everything.",
+          "One difficult competition.",
+          "A selection decision.",
+          "A series of disappointing results.",
+          "Suddenly they're doubting abilities that haven't actually disappeared.",
+          "Confidence often changes more gradually than it appears.",
+          "Recognising those changes early can make a meaningful difference.",
+        ],
       },
       {
-        title: "Winning doesn't increase confidence.",
-        body: "Success doesn't always bring satisfaction. They still doubt themselves.",
+        title: "Winning doesn't seem to boost their confidence.",
+        lines: [
+          "They win.",
+          "But only talk about what went wrong.",
+          "They improve.",
+          "But compare themselves to someone better.",
+          "No result seems to bring lasting confidence.",
+          "Many driven young athletes set exceptionally high standards.",
+          "Sometimes those standards become so demanding that success never feels enough.",
+        ],
       },
       {
-        title: "Constant comparison.",
-        body: "They compare themselves to others — teammates, rivals, or even themselves.",
+        title: "They constantly compare themselves to others.",
+        lines: [
+          "Who's improving faster.",
+          "Who's ranked higher.",
+          "Who's been selected.",
+          "Who's getting more attention.",
+          "Slowly, their focus shifts away from their own progress.",
+          "And towards everyone else's.",
+          "Comparison has become part of modern sport.",
+          "Helping young athletes stay connected to their own journey becomes increasingly important as competition levels rise.",
+        ],
       },
       {
-        title: "They can't move on after losing.",
-        body: "The loss stays with them. It affects their sleep and the next performance.",
+        title: "Losing affects them long after the competition ends.",
+        lines: [
+          "The match is over.",
+          "Everyone else has moved on.",
+          "They haven't.",
+          "They replay moments.",
+          "Question decisions.",
+          "Carry the disappointment home.",
+          "Sometimes into the next competition.",
+          "Disappointment is part of sport.",
+          "The challenge is helping young athletes recover without letting it define them.",
+        ],
       },
     ],
   },
@@ -58,24 +142,60 @@ const CHAPTERS = [
     id: "wellbeing",
     chapter: "Chapter III",
     title: "Enjoyment & Wellbeing",
-    quote: "Sometimes the biggest change is the one nobody notices first.",
+    intro: "Sport should challenge young athletes. It should also leave room for enjoyment, curiosity and growth.",
     image: "/images/understanding-ch3-wellbeing.jpg",
     items: [
       {
-        title: "Frustration shows up often.",
-        body: "Small things trigger big reactions. They feel frustrated more easily than before.",
+        title: "They're becoming frustrated much more easily.",
+        lines: [
+          "A small mistake leads to visible frustration.",
+          "Body language changes.",
+          "The next few minutes become harder than they needed to be.",
+          "It begins happening more often.",
+          "Frustration is a natural emotion.",
+          "Learning how to respond to it is a skill that develops over time.",
+        ],
       },
       {
-        title: "They've lost the joy.",
-        body: "They don't feel excited to train or play. Sport feels like a task, not fun.",
+        title: "They've stopped enjoying the sport they once loved.",
+        lines: [
+          "They still train.",
+          "They still compete.",
+          "But something feels different.",
+          "The excitement has faded.",
+          "What once brought energy now feels like pressure.",
+          "They participate because they feel they should.",
+          "Not because they want to.",
+          "Many athletes go through periods like this.",
+          "Understanding what's changed is often the first step.",
+        ],
       },
       {
-        title: "They talk about quitting.",
-        body: "They stop seeing the point. They imagine life without sport.",
+        title: "They're talking about quitting.",
+        lines: [
+          "Sometimes it's after a difficult competition.",
+          "Sometimes after selection.",
+          "Sometimes quietly on the drive home.",
+          "“I don't think I want to do this anymore.”",
+          "You don't know whether it's frustration.",
+          "Or something deeper.",
+          "Many young athletes think about quitting at some point.",
+          "Understanding why they're saying it is often more important than the words themselves.",
+        ],
       },
       {
-        title: "Not sure if we should seek support.",
-        body: "You're unsure what's normal and what's not. You just want what's best for your child.",
+        title: "We're not sure if it's time to seek support.",
+        lines: [
+          "You've noticed changes.",
+          "You've had conversations.",
+          "You've tried encouraging them.",
+          "Some days things improve.",
+          "Other days they don't.",
+          "You're simply wondering whether talking to someone might help.",
+          "Many families reach this point.",
+          "Seeking support isn't about assuming something is wrong.",
+          "It's about understanding what your child may need to keep developing with confidence.",
+        ],
       },
     ],
   },
@@ -131,7 +251,7 @@ export default function UnderstandingPage() {
               <div className="relative">
                 <p className="text-xs uppercase tracking-[0.2em] text-white/50 mb-3">{c.chapter}</p>
                 <h3 className="font-serif text-3xl mb-4">{c.title}</h3>
-                <p className="font-serif italic text-white/80 mb-6 max-w-xs">{c.quote}</p>
+                <p className="font-serif italic text-white/80 mb-6 max-w-sm">{c.intro}</p>
                 <Link href="/get-started" className="text-sm border-b border-white/50 pb-0.5">
                   Learn more about this chapter →
                 </Link>
@@ -139,36 +259,41 @@ export default function UnderstandingPage() {
             </div>
             <ul className="divide-y divide-white/10 border-t border-white/10 md:border-t-0">
               {c.items.map((item, i) => (
-                <li key={item.title} className="py-5 flex gap-4">
-                  <span className="font-serif text-white/40 text-lg w-8 shrink-0">
-                    {String(ci * 4 + i + 1).padStart(2, "0")}
-                  </span>
-                  <div>
-                    <p className="font-medium mb-1">{item.title}</p>
-                    <p className="text-sm text-white/60">{item.body}</p>
-                  </div>
-                </li>
+                <ExpandablePointer
+                  key={item.title}
+                  n={String(ci * 4 + i + 1).padStart(2, "0")}
+                  title={item.title}
+                  lines={item.lines}
+                />
               ))}
             </ul>
           </Container>
         </section>
       ))}
 
+      <section className="bg-cream-2 py-16 text-center">
+        <Container className="max-w-2xl mx-auto">
+          <h3 className="font-serif text-2xl mb-3">Seeing something familiar?</h3>
+          <p className="text-sm text-muted mb-3">
+            Many of these experiences are a normal part of growing up in sport. Sometimes they pass with time,
+            experience and support. Sometimes they become recurring patterns.
+          </p>
+          <p className="text-sm text-muted">
+            If you&apos;ve recognised your child in several of these experiences, talking to someone can help you
+            better understand what they&apos;re going through.
+          </p>
+        </Container>
+      </section>
+
       <section className="bg-cream py-16">
         <Container className="grid md:grid-cols-2 gap-10 items-center">
           <div>
-            <h3 className="font-serif text-2xl mb-3">Seeing something familiar?</h3>
-            <p className="text-sm text-muted mb-2 max-w-md">
-              Many of these experiences are a normal part of growing up in sport. Sometimes they pass with time,
-              experience and support. Sometimes they become recurring patterns.
-            </p>
+            <h3 className="font-serif text-2xl mb-3">Finding the right support can make a meaningful difference.</h3>
             <p className="text-sm text-muted max-w-md mb-6">
-              If you&apos;ve recognised your child in several of these experiences, talking to someone can help you
-              better understand what they&apos;re going through.
+              Every young athlete is different. The support they need should be too. YovoEdge helps families connect
+              with qualified sports counsellors and sports psychologists whose experience aligns with the unique
+              needs of each athlete.
             </p>
-            <Link href="/get-started" className="text-sm font-medium border-b border-ink/60 pb-0.5">
-              Talk to us →
-            </Link>
           </div>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img

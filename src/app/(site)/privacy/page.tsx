@@ -6,6 +6,17 @@ export const metadata = { title: "Privacy Note — YovoEdge" };
 export default function PrivacyPage() {
   return (
     <LegalPage title="Privacy Note" lastUpdated={PRIVACY_LAST_UPDATED}>
+      <P>
+        This note explains, in plain language, what information we collect about you and your child, why we collect
+        it, who can see it, and the control you have over it. We&apos;ve tried to write it the way we&apos;d want it
+        explained to us. If anything here is unclear, ask us and we&apos;ll explain it properly.
+      </P>
+      <P>
+        Because we work with young athletes and their mental wellbeing, we treat the information you share with us
+        as sensitive, and we handle it carefully. This note is written for parents and guardians, since a parent or
+        guardian sets up and consents to every match.
+      </P>
+
       <H2>Who we are</H2>
       <P>
         YovoEdge connects young athletes (aged 9 to 18) with vetted sport and exercise psychologists. When you use

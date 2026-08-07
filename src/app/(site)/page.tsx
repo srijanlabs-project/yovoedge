@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Hero } from "@/components/Hero";
 import { Container } from "@/components/Container";
 import { Footer } from "@/components/Footer";
+import { HomeHighlights } from "@/components/HomeHighlights";
 
 const CARDS = [
   {
@@ -36,20 +37,24 @@ export default function HomePage() {
   return (
     <>
       <Hero
-        title={<>Young athletes<br />feel the pressure early.</>}
-        italicLine={<>Finding the right support<br />shouldn&apos;t be the hard part.</>}
-        description="Mental support for young athletes aged 9–18, across India."
+        eyebrow="Mental Performance Matters"
+        title={<>Young athletes face pressure<br />long before the scoreboard does.</>}
+        italicLine="Find sports psychologists and counsellors who understand competition, performance, confidence and the realities of growing up in sport."
+        description="For athletes aged 9–18 and the parents supporting them."
         image="/images/home-hero.jpg"
         imageAlt="A young athlete sitting quietly with his tennis bag"
         cta={
           <Link
             href="/get-started"
-            className="inline-block bg-white text-ink text-sm font-medium px-6 py-3 rounded-full hover:bg-white/90 transition-colors"
+            className="inline-block bg-olive text-white text-sm font-medium px-6 py-3 rounded-full hover:bg-olive-dark transition-colors"
           >
-            Talk to Us →
+            Start a Conversation →
           </Link>
         }
+        note="No diagnosis required. No referral needed."
       />
+
+      <HomeHighlights />
 
       <section className="bg-cream py-24 text-center">
         <Container>

@@ -1,23 +1,67 @@
 import { z } from "zod";
 
 export const CONCERN_AREAS = [
-  "Performance in competition",
-  "Confidence / Self-belief",
-  "Managing pressure",
-  "Focus & concentration",
-  "Emotions & mood",
-  "Injury / Setbacks",
-  "Motivation / Enjoyment",
-  "Life balance",
-  "Relationships / Communication",
+  "Performs differently in competition",
+  "Competition nerves",
+  "Confidence",
+  "One mistake affects the rest of the competition",
+  "Focus",
+  "Comparison",
+  "Motivation",
+  "Frustration",
+  "Emotional regulation",
+  "Recovering after setbacks",
+  "Thinking about quitting",
+  "I'm not sure",
+] as const;
+
+export const SPORTS = [
+  "Athletics",
+  "Badminton",
+  "Basketball",
+  "Boxing",
+  "Chess",
+  "Cricket",
+  "Cycling",
+  "Football",
+  "Golf",
+  "Gymnastics",
+  "Hockey",
+  "Kabaddi",
+  "Martial Arts",
+  "Padel",
+  "Shooting",
+  "Squash",
+  "Swimming",
+  "Table Tennis",
+  "Tennis",
+  "Volleyball",
+  "Wrestling",
   "Other",
 ] as const;
 
-export const GENDERS = ["Female", "Male", "Non-binary", "Prefer not to say"] as const;
-export const LEVELS = ["Beginner", "School / Club", "State", "National", "International"] as const;
-export const YEARS_PLAYING = ["Less than 1 year", "1-3 years", "3-5 years", "5+ years"] as const;
-export const DURATIONS = ["Just noticed it", "A few weeks", "A few months", "6+ months"] as const;
-export const CONCERN_LEVELS = ["Just curious", "A little concerned", "Concerned", "Very concerned"] as const;
+export const ATHLETE_AGES = [9, 10, 11, 12, 13, 14, 15, 16, 17, 18] as const;
+
+export const GENDERS = ["Girl", "Boy", "Non-binary", "Prefer not to say"] as const;
+export const LEVELS = [
+  "Plays recreationally",
+  "Competes locally",
+  "Competes at district level",
+  "Competes at state level",
+  "Competes nationally",
+  "Competes internationally",
+  "Not sure",
+] as const;
+export const PRIOR_SUPPORT = ["No", "Coach", "Counsellor", "Sports Psychologist", "Clinical Psychologist", "Other"] as const;
+export const DURATIONS = [
+  "Less than a month",
+  "1–3 months",
+  "3–6 months",
+  "More than 6 months",
+  "It comes and goes",
+  "I'm not sure",
+] as const;
+export const CONNECTION_PREFERENCES = ["Online", "In-person", "Either"] as const;
 
 // Section 0 — About you (the parent/guardian). This section did not exist in
 // the original design mockups; the Privacy Note promises this data is
@@ -34,7 +78,8 @@ export const parentSchema = z.object({
 
 // Section 1 — About your athlete
 export const athleteSchema = z.object({
-  athleteName: z.string().trim().min(1, "Please enter your athlete's first name."),
+  // Optional — parents may not want to share the athlete's name immediately.
+  athleteName: z.string().trim().optional().or(z.literal("")),
   athleteAge: z
     .number({ error: "Please enter your athlete's age." })
     .int()
@@ -43,7 +88,7 @@ export const athleteSchema = z.object({
   athleteGender: z.enum(GENDERS).optional().or(z.literal("")),
   athleteSport: z.string().trim().min(1, "Please tell us their primary sport."),
   athleteLevel: z.enum(LEVELS).optional().or(z.literal("")),
-  athleteYearsPlaying: z.enum(YEARS_PLAYING).optional().or(z.literal("")),
+  priorSupport: z.enum(PRIOR_SUPPORT).optional().or(z.literal("")),
 });
 
 // Section 2 — What have you been noticing
@@ -51,12 +96,13 @@ export const noticingSchema = z.object({
   noticingText: z.string().trim().max(1000).optional().or(z.literal("")),
   concernAreas: z.array(z.enum(CONCERN_AREAS)).optional().default([]),
   durationNoticed: z.enum(DURATIONS).optional().or(z.literal("")),
-  concernLevel: z.enum(CONCERN_LEVELS).optional().or(z.literal("")),
 });
 
-// Section 3 — What would be most helpful right now
+// Section 3 — What are you hoping for
 export const helpfulSchema = z.object({
   helpfulText: z.string().trim().max(1000).optional().or(z.literal("")),
+  connectionPreference: z.enum(CONNECTION_PREFERENCES).optional().or(z.literal("")),
+  city: z.string().trim().max(100).optional().or(z.literal("")),
 });
 
 export const intakeSchema = parentSchema

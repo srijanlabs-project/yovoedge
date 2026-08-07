@@ -28,18 +28,19 @@ export type SubmissionRecord = {
   parent_email: string;
   parent_phone: string;
 
-  athlete_name: string;
+  athlete_name: string | null;
   athlete_age: number;
   athlete_gender: string | null;
   athlete_sport: string;
   athlete_level: string | null;
-  athlete_years_playing: string | null;
+  prior_support: string | null;
 
   noticing_text: string | null;
   concern_areas: string[];
   duration_noticed: string | null;
-  concern_level: string | null;
   helpful_text: string | null;
+  connection_preference: string | null;
+  city: string | null;
 
   consent_accepted: boolean;
   consent_timestamp: string;
@@ -69,18 +70,29 @@ function ensureSchema(): Promise<void> {
           parent_email           TEXT NOT NULL,
           parent_phone           TEXT NOT NULL,
 
-          athlete_name           TEXT NOT NULL,
+          -- athlete_name is nullable: the form now treats the athlete's
+          -- first name as optional (some parents don't want to share it
+          -- immediately).
+          athlete_name           TEXT,
           athlete_age            INTEGER NOT NULL,
           athlete_gender         TEXT,
           athlete_sport          TEXT NOT NULL,
           athlete_level          TEXT,
+          -- athlete_years_playing is retained for existing rows but is no
+          -- longer written to — replaced by prior_support below.
           athlete_years_playing  TEXT,
+          prior_support          TEXT,
 
           noticing_text          TEXT,
           concern_areas          TEXT[] NOT NULL DEFAULT '{}',
           duration_noticed       TEXT,
+          -- concern_level is retained for existing rows but no longer
+          -- written to — the "how concerned are you" field was dropped
+          -- from the redesigned form.
           concern_level          TEXT,
           helpful_text           TEXT,
+          connection_preference  TEXT,
+          city                   TEXT,
 
           consent_accepted       BOOLEAN NOT NULL,
           consent_timestamp      TIMESTAMPTZ NOT NULL,
@@ -91,6 +103,11 @@ function ensureSchema(): Promise<void> {
 
           status                 TEXT NOT NULL DEFAULT 'new'
         );
+
+        ALTER TABLE submissions ALTER COLUMN athlete_name DROP NOT NULL;
+        ALTER TABLE submissions ADD COLUMN IF NOT EXISTS prior_support TEXT;
+        ALTER TABLE submissions ADD COLUMN IF NOT EXISTS connection_preference TEXT;
+        ALTER TABLE submissions ADD COLUMN IF NOT EXISTS city TEXT;
       `)
       .then(() => undefined);
   }
@@ -103,17 +120,17 @@ export async function insertSubmission(record: SubmissionRecord): Promise<void> 
     `INSERT INTO submissions (
       id, created_at,
       parent_name, parent_email, parent_phone,
-      athlete_name, athlete_age, athlete_gender, athlete_sport, athlete_level, athlete_years_playing,
-      noticing_text, concern_areas, duration_noticed, concern_level, helpful_text,
+      athlete_name, athlete_age, athlete_gender, athlete_sport, athlete_level, prior_support,
+      noticing_text, concern_areas, duration_noticed, helpful_text, connection_preference, city,
       consent_accepted, consent_timestamp, privacy_version, terms_version, consent_ip, consent_user_agent,
       status
     ) VALUES (
       $1, $2,
       $3, $4, $5,
       $6, $7, $8, $9, $10, $11,
-      $12, $13, $14, $15, $16,
-      $17, $18, $19, $20, $21, $22,
-      $23
+      $12, $13, $14, $15, $16, $17,
+      $18, $19, $20, $21, $22, $23,
+      $24
     )`,
     [
       record.id,
@@ -126,12 +143,13 @@ export async function insertSubmission(record: SubmissionRecord): Promise<void> 
       record.athlete_gender,
       record.athlete_sport,
       record.athlete_level,
-      record.athlete_years_playing,
+      record.prior_support,
       record.noticing_text,
       record.concern_areas,
       record.duration_noticed,
-      record.concern_level,
       record.helpful_text,
+      record.connection_preference,
+      record.city,
       record.consent_accepted,
       record.consent_timestamp,
       record.privacy_version,
@@ -153,4 +171,32 @@ export async function getAllSubmissions(): Promise<SubmissionRecord[]> {
     created_at: new Date(r.created_at).toISOString(),
     consent_timestamp: new Date(r.consent_timestamp).toISOString(),
   })) as SubmissionRecord[];
+}
+
+export async function getSubmissionsPage(
+  page: number,
+  pageSize: number
+): Promise<{ rows: SubmissionRecord[]; total: number; totalPages: number }> {
+  await ensureSchema();
+
+  const { rows: countRows } = await pool.query(`SELECT COUNT(*)::int AS count FROM submissions`);
+  const total = countRows[0]?.count ?? 0;
+  const totalPages = Math.max(1, Math.ceil(total / pageSize));
+  const safePage = Math.min(Math.max(1, page), totalPages);
+  const offset = (safePage - 1) * pageSize;
+
+  const { rows } = await pool.query(
+    `SELECT * FROM submissions ORDER BY created_at DESC LIMIT $1 OFFSET $2`,
+    [pageSize, offset]
+  );
+
+  return {
+    rows: rows.map((r) => ({
+      ...r,
+      created_at: new Date(r.created_at).toISOString(),
+      consent_timestamp: new Date(r.consent_timestamp).toISOString(),
+    })) as SubmissionRecord[],
+    total,
+    totalPages,
+  };
 }

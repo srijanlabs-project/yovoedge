@@ -77,8 +77,8 @@ export default function ConsentPage() {
             <h2 className="font-medium mb-4 flex items-center gap-2">🔒 Before we match your child</h2>
             <p className="text-sm text-muted mb-3">
               You&apos;re setting up sessions between your child and a vetted sport psychologist. We&apos;ll keep some
-              basics ({intake.athleteName}, age {intake.athleteAge}, {intake.athleteSport}) and what you&apos;d like to
-              work on, so we can match them well.
+              basics ({intake.athleteName || "your athlete"}, age {intake.athleteAge}, {intake.athleteSport}) and what
+              you&apos;d like to work on, so we can match them well.
             </p>
             <p className="text-sm text-muted mb-6">
               What your child discusses in sessions stays private between them and their practitioner. We&apos;ll

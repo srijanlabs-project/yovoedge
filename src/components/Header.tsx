@@ -7,7 +7,7 @@ import { Container } from "./Container";
 
 const NAV = [
   { href: "/understanding-young-athletes", label: "Understanding Young Athletes" },
-  { href: "/finding-support", label: "Finding Support" },
+  { href: "/finding-support", label: "Could Support Help?" },
   { href: "/our-principles", label: "Our Principles" },
 ];
 
@@ -24,8 +24,13 @@ export function Header({ dark = true }: { dark?: boolean }) {
       className={`absolute top-0 left-0 right-0 z-30 ${dark ? "" : "relative border-b border-line bg-paper"}`}
     >
       <Container className="flex items-center justify-between py-6">
-        <Link href="/" className={`font-serif text-2xl tracking-tight ${logoColor}`}>
-          YovoEdge
+        <Link href="/" className="flex items-center">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={dark ? "/logo/logo-mark-dark.png" : "/logo/logo-mark-light.png"}
+            alt="YovoEdge"
+            className="h-8 w-auto"
+          />
         </Link>
 
         <nav className="hidden md:flex items-center gap-8 text-sm">

@@ -5,16 +5,59 @@ import { useRouter } from "next/navigation";
 import { Header } from "@/components/Header";
 import { Container } from "@/components/Container";
 import { Footer } from "@/components/Footer";
+import { FaqAccordion } from "@/components/FaqAccordion";
 import {
   CONCERN_AREAS,
   GENDERS,
   LEVELS,
-  YEARS_PLAYING,
+  PRIOR_SUPPORT,
+  SPORTS,
+  ATHLETE_AGES,
   DURATIONS,
-  CONCERN_LEVELS,
+  CONNECTION_PREFERENCES,
   intakeSchema,
   IntakeData,
 } from "@/lib/validation";
+
+const CITIES = [
+  "Mumbai", "Delhi", "Bengaluru", "Hyderabad", "Chennai", "Kolkata", "Pune",
+  "Ahmedabad", "Jaipur", "Chandigarh", "Kochi", "Lucknow",
+];
+
+const FAQS = [
+  {
+    q: "How much does it cost?",
+    a: "YovoEdge doesn't charge families to be matched. Session fees are set directly by each practitioner, so costs vary depending on who you work with. We'll explain this before you decide whether to move forward.",
+  },
+  {
+    q: "What happens after I submit the form?",
+    a: "A member of our team personally reviews every enquiry. We'll get in touch, understand your situation in more detail if needed, and discuss what the next step might look like.",
+  },
+  {
+    q: "How quickly will someone contact me?",
+    a: "Usually within 2-3 business days.",
+  },
+  {
+    q: "Will my child need to attend every session?",
+    a: "That depends on the practitioner and your athlete's needs. Some conversations involve parents as well, particularly at the beginning.",
+  },
+  {
+    q: "Is what my child says kept private?",
+    a: "Yes. Conversations remain between your child and their practitioner, except where there's a safety concern. In those situations, parents are involved.",
+  },
+  {
+    q: "Is YovoEdge right for every situation?",
+    a: "YovoEdge is designed to support everyday performance and wellbeing challenges in young athletes. It isn't an emergency, a crisis, or a medical service.",
+  },
+  {
+    q: "Can sessions happen online?",
+    a: "Yes. Depending on the practitioner, support may be available online, in person or both.",
+  },
+  {
+    q: "I'm not sure whether my child needs support.",
+    a: "That's okay. Many parents reach out because they're simply looking for guidance. The first conversation is about understanding your athlete's situation.",
+  },
+] as const;
 
 const emptyForm = {
   parentName: "",
@@ -25,12 +68,13 @@ const emptyForm = {
   athleteGender: "",
   athleteSport: "",
   athleteLevel: "",
-  athleteYearsPlaying: "",
+  priorSupport: "",
   noticingText: "",
   concernAreas: [] as string[],
   durationNoticed: "",
-  concernLevel: "",
   helpfulText: "",
+  connectionPreference: "",
+  city: "",
 };
 
 export default function GetStartedPage() {
@@ -142,7 +186,7 @@ export default function GetStartedPage() {
             <fieldset>
               <Legend n={1} title="About your athlete" sub="Help us understand who they are." />
               <div className="grid md:grid-cols-3 gap-4">
-                <Field label="Athlete's first name" error={errors.athleteName}>
+                <Field label="Athlete's first name (optional)" error={errors.athleteName} hint="Parents may not want to share immediately.">
                   <input
                     id="athleteName"
                     className={inputClass}
@@ -152,16 +196,17 @@ export default function GetStartedPage() {
                   />
                 </Field>
                 <Field label="Age" error={errors.athleteAge}>
-                  <input
+                  <select
                     id="athleteAge"
-                    type="number"
-                    min={9}
-                    max={18}
                     className={inputClass}
-                    placeholder="e.g. 14"
                     value={form.athleteAge}
                     onChange={(e) => set("athleteAge", e.target.value)}
-                  />
+                  >
+                    <option value="">Select</option>
+                    {ATHLETE_AGES.map((a) => (
+                      <option key={a} value={a}>{a}</option>
+                    ))}
+                  </select>
                 </Field>
                 <Field label="Gender">
                   <select
@@ -178,13 +223,19 @@ export default function GetStartedPage() {
                 <Field label="Primary sport" error={errors.athleteSport}>
                   <input
                     id="athleteSport"
+                    list="sports-list"
                     className={inputClass}
                     placeholder="e.g. Tennis"
                     value={form.athleteSport}
                     onChange={(e) => set("athleteSport", e.target.value)}
                   />
+                  <datalist id="sports-list">
+                    {SPORTS.map((s) => (
+                      <option key={s} value={s} />
+                    ))}
+                  </datalist>
                 </Field>
-                <Field label="Level">
+                <Field label="Competition level">
                   <select
                     className={inputClass}
                     value={form.athleteLevel}
@@ -196,15 +247,15 @@ export default function GetStartedPage() {
                     ))}
                   </select>
                 </Field>
-                <Field label="Years playing">
+                <Field label="Has anyone previously supported your athlete?">
                   <select
                     className={inputClass}
-                    value={form.athleteYearsPlaying}
-                    onChange={(e) => set("athleteYearsPlaying", e.target.value)}
+                    value={form.priorSupport}
+                    onChange={(e) => set("priorSupport", e.target.value)}
                   >
                     <option value="">Select</option>
-                    {YEARS_PLAYING.map((y) => (
-                      <option key={y} value={y}>{y}</option>
+                    {PRIOR_SUPPORT.map((p) => (
+                      <option key={p} value={p}>{p}</option>
                     ))}
                   </select>
                 </Field>
@@ -213,7 +264,7 @@ export default function GetStartedPage() {
 
             <fieldset>
               <Legend n={2} title="What have you been noticing?" sub="There's no right or wrong. We just want to understand your perspective." />
-              <label className="block text-sm mb-2">What are some of the changes or challenges you&apos;ve noticed recently?</label>
+              <label className="block text-sm mb-2">Tell us what&apos;s been happening.</label>
               <div className="relative mb-6">
                 <textarea
                   className={inputClass + " min-h-28"}
@@ -225,7 +276,7 @@ export default function GetStartedPage() {
                 <span className="absolute bottom-2 right-3 text-xs text-muted">{form.noticingText.length} / 1000</span>
               </div>
 
-              <label className="block text-sm mb-2">Select any areas that feel relevant (optional)</label>
+              <label className="block text-sm mb-2">Which of these feel familiar? (optional)</label>
               <div className="grid grid-cols-2 md:grid-cols-3 gap-2 mb-6">
                 {CONCERN_AREAS.map((area) => (
                   <label key={area} className="flex items-center gap-2 text-sm bg-paper border border-line rounded-md px-3 py-2 cursor-pointer">
@@ -239,37 +290,57 @@ export default function GetStartedPage() {
                 ))}
               </div>
 
-              <div className="grid md:grid-cols-2 gap-4">
-                <Field label="How long have you been noticing this?">
-                  <select className={inputClass} value={form.durationNoticed} onChange={(e) => set("durationNoticed", e.target.value)}>
-                    <option value="">Select</option>
-                    {DURATIONS.map((d) => (
-                      <option key={d} value={d}>{d}</option>
-                    ))}
-                  </select>
-                </Field>
-                <Field label="How concerned are you right now?">
-                  <select className={inputClass} value={form.concernLevel} onChange={(e) => set("concernLevel", e.target.value)}>
-                    <option value="">Select</option>
-                    {CONCERN_LEVELS.map((c) => (
-                      <option key={c} value={c}>{c}</option>
-                    ))}
-                  </select>
-                </Field>
-              </div>
+              <Field label="How long have you noticed this?">
+                <select className={inputClass} value={form.durationNoticed} onChange={(e) => set("durationNoticed", e.target.value)}>
+                  <option value="">Select</option>
+                  {DURATIONS.map((d) => (
+                    <option key={d} value={d}>{d}</option>
+                  ))}
+                </select>
+              </Field>
             </fieldset>
 
             <fieldset>
-              <Legend n={3} title="What would be most helpful right now?" sub="What are you hoping support could help with?" />
-              <div className="relative">
+              <Legend n={3} title="What are you hoping for?" sub="Tell us what you'd like to be different for your athlete." />
+              <div className="relative mb-6">
                 <textarea
                   className={inputClass + " min-h-28"}
                   maxLength={1000}
-                  placeholder="Share what you're hoping for..."
+                  placeholder="Tell us what you'd like to be different for your athlete."
                   value={form.helpfulText}
                   onChange={(e) => set("helpfulText", e.target.value)}
                 />
                 <span className="absolute bottom-2 right-3 text-xs text-muted">{form.helpfulText.length} / 1000</span>
+              </div>
+
+              <div className="grid md:grid-cols-2 gap-4">
+                <Field label="How would you prefer to connect?">
+                  <select
+                    className={inputClass}
+                    value={form.connectionPreference}
+                    onChange={(e) => set("connectionPreference", e.target.value)}
+                  >
+                    <option value="">Select</option>
+                    {CONNECTION_PREFERENCES.map((c) => (
+                      <option key={c} value={c}>{c}</option>
+                    ))}
+                  </select>
+                </Field>
+                <Field label="City">
+                  <input
+                    id="city"
+                    list="cities-list"
+                    className={inputClass}
+                    placeholder="e.g. Mumbai"
+                    value={form.city}
+                    onChange={(e) => set("city", e.target.value)}
+                  />
+                  <datalist id="cities-list">
+                    {CITIES.map((c) => (
+                      <option key={c} value={c} />
+                    ))}
+                  </datalist>
+                </Field>
               </div>
             </fieldset>
 
@@ -295,9 +366,10 @@ export default function GetStartedPage() {
             <div>
               <h4 className="font-medium mb-2">What happens next?</h4>
               <ol className="space-y-3 text-muted">
-                <li><strong className="text-ink">1. We review your submission.</strong><br />Our team carefully reads your responses.</li>
-                <li><strong className="text-ink">2. We reach out.</strong><br />We&apos;ll be in touch within 2–3 business days.</li>
-                <li><strong className="text-ink">3. We help you take the next step.</strong><br />We&apos;ll guide you on what could be most helpful for your athlete.</li>
+                <li><strong className="text-ink">1. We read every submission personally.</strong></li>
+                <li><strong className="text-ink">2. We&apos;ll reach out within 1–2 business days.</strong></li>
+                <li><strong className="text-ink">3. If we believe support could be helpful, we&apos;ll guide you through the next steps and discuss a suitable practitioner.</strong></li>
+                <li><strong className="text-ink">4. There&apos;s no obligation to continue.</strong></li>
               </ol>
             </div>
             <div>
@@ -308,6 +380,13 @@ export default function GetStartedPage() {
               </p>
             </div>
           </aside>
+        </Container>
+      </section>
+
+      <section className="bg-paper py-16 border-t border-line">
+        <Container className="max-w-2xl">
+          <h2 className="font-serif text-2xl mb-6 text-center">Questions parents often ask</h2>
+          <FaqAccordion items={FAQS} />
         </Container>
       </section>
 
@@ -346,11 +425,22 @@ function Legend({ n, title, sub }: { n: number; title: string; sub: string }) {
   );
 }
 
-function Field({ label, error, children }: { label: string; error?: string; children: React.ReactNode }) {
+function Field({
+  label,
+  error,
+  hint,
+  children,
+}: {
+  label: string;
+  error?: string;
+  hint?: string;
+  children: React.ReactNode;
+}) {
   return (
     <div>
       <label className="block text-sm mb-1">{label}</label>
       {children}
+      {hint && !error && <p className="text-xs text-muted mt-1">{hint}</p>}
       {error && <p className="text-xs text-red-600 mt-1">{error}</p>}
     </div>
   );

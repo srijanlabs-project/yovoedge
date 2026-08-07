@@ -35,16 +35,18 @@ export default async function ConfirmationPage({
           <h2 className="font-serif text-2xl mb-6">What happens next?</h2>
           <ol className="space-y-5 text-sm">
             <li>
-              <strong>1. We review your submission.</strong>
-              <p className="text-muted">Our team carefully reads your responses.</p>
+              <strong>1. We read every submission personally.</strong>
             </li>
             <li>
-              <strong>2. We reach out.</strong>
-              <p className="text-muted">We&apos;ll be in touch at the email or phone number you shared, within 2–3 business days.</p>
+              <strong>2. We&apos;ll reach out within 1–2 business days.</strong>
+              <p className="text-muted">At the email or phone number you shared.</p>
             </li>
             <li>
-              <strong>3. We help you take the next step.</strong>
-              <p className="text-muted">We&apos;ll guide you on what could be most helpful for your athlete, and share practitioner options for you to choose from.</p>
+              <strong>3. If we believe support could be helpful, we&apos;ll guide you through the next steps.</strong>
+              <p className="text-muted">And discuss a suitable practitioner for your athlete.</p>
+            </li>
+            <li>
+              <strong>4. There&apos;s no obligation to continue.</strong>
             </li>
           </ol>
 

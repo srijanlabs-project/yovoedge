@@ -110,11 +110,11 @@ export default function TermsPage() {
         Because YovoEdge connects you with a practitioner rather than managing the sessions themselves, individual
         sessions are arranged directly between you and your child&apos;s practitioner. If you need to cancel or
         reschedule a session, please let the practitioner know directly, and give them reasonable notice out of
-        respect for their time.
+        respect for their time. The specific notice for cancelling a session is between you and them.
       </P>
 
       <H2>9. Our responsibility and its limits</H2>
-      <P>We take real care in how we run YovoEdge, especially because we work with children. But there are limits to what we&apos;re responsible for:</P>
+      <P>We take real care in how we run YovoEdge, especially because we work with children. But there are limits to what we&apos;re responsible for, and it&apos;s fair to be clear about them:</P>
       <Ul>
         <li>
           Because we connect you with independent practitioners rather than provide the sessions ourselves, we are
