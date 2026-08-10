@@ -45,7 +45,7 @@ export default function FindingSupportPage() {
         description="Knowing when and how to seek support can feel overwhelming. We're here to make that journey clearer."
         note="SCROLL TO EXPLORE ↓"
         image="/images/finding-support-hero.jpg"
-        imageAlt="A young athlete sitting on a bench at a tennis court"
+        imageAlt="A young athlete sitting with his coach on the field at sunset"
       />
 
       <section className="bg-cream py-20">
@@ -82,7 +82,7 @@ export default function FindingSupportPage() {
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src="/images/finding-support-walk.jpg"
-          alt="A parent walking with their young athlete"
+          alt="A young athlete talking with her parent on the stadium bleachers"
           className="h-64 md:h-auto w-full object-cover"
         />
         <div className="bg-cream-2 p-10 md:p-16 flex flex-col justify-center">
@@ -106,7 +106,7 @@ export default function FindingSupportPage() {
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="/images/finding-support-chair.jpg"
-            alt="A quiet reading corner"
+            alt="A young athlete talking with her coach courtside"
             className="h-48 w-full rounded-lg object-cover"
           />
         </Container>

@@ -127,22 +127,10 @@ const WHO_FOR = [
 ];
 
 const HOW_IT_WORKS = [
-  {
-    title: "Understand your athlete",
-    body: "Get clarity on what they're experiencing.",
-  },
-  {
-    title: "Explore specialists",
-    body: "Browse verified mental performance professionals.",
-  },
-  {
-    title: "Find the right fit",
-    body: "Choose someone your child connects with.",
-  },
-  {
-    title: "Build mental skills over time",
-    body: "Track progress and grow with support.",
-  },
+  { title: "We understand your athlete" },
+  { title: "Match him with the right specialist" },
+  { title: "You approve, and sessions begin" },
+  { title: "Your athlete gets support; you stay in the loop" },
 ];
 
 function ColumnHeading({ icon, children }: { icon: React.ReactNode; children: React.ReactNode }) {
@@ -222,7 +210,6 @@ export function HomeHighlights() {
                 </span>
                 <div>
                   <p className="text-sm font-medium">{step.title}</p>
-                  <p className="text-sm text-muted">{step.body}</p>
                 </div>
               </li>
             ))}

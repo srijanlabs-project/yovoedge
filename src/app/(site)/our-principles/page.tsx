@@ -37,7 +37,7 @@ const PRINCIPLES = [
     title: "Every conversation starts with trust.",
     body: "Choosing support for your child is an important decision. We believe trust is earned through transparency, clear communication and respecting the confidence families place in us.",
     image: "/images/principle-5-vase.jpg",
-    imageAlt: "A quiet, sunlit corner with a small vase of leaves",
+    imageAlt: "A coach kneeling beside a young athlete on the track at sunset",
   },
 ];
 
@@ -93,7 +93,7 @@ export default function OurPrinciplesPage() {
         </Container>
       </section>
 
-      <Footer />
+      <Footer full />
     </>
   );
 }

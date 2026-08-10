@@ -130,7 +130,7 @@ export default function GetStartedPage() {
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src="/images/get-started-hero.jpg"
-          alt="A parent and child sitting together at sunset"
+          alt="A mother and son sitting together on a courtside bench at sunset"
           className="absolute inset-0 w-full h-full object-cover object-top"
         />
         <div className="absolute inset-0 bg-[linear-gradient(100deg,rgba(10,10,8,0.75)_0%,rgba(10,10,8,0.55)_30%,rgba(10,10,8,0.15)_50%,transparent_65%)]" />
@@ -395,7 +395,7 @@ export default function GetStartedPage() {
           <p className="text-xs uppercase tracking-[0.2em] text-muted mb-2">Our promise</p>
           <h3 className="font-serif text-2xl mb-3">We&apos;re here to help you and your athlete.</h3>
           <p className="text-sm text-muted max-w-sm">
-            We&apos;ll listen, understand and guide you toward the right support — at the right time.
+            We&apos;ll listen, understand and guide you toward the right support at the right time.
           </p>
         </Container>
         {/* eslint-disable-next-line @next/next/no-img-element */}

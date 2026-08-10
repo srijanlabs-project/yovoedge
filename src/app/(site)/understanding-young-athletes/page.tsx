@@ -2,7 +2,6 @@ import { Hero } from "@/components/Hero";
 import { Container } from "@/components/Container";
 import { Footer } from "@/components/Footer";
 import { ExpandablePointer } from "@/components/ExpandablePointer";
-import Link from "next/link";
 
 const CHAPTERS = [
   {
@@ -208,7 +207,7 @@ export default function UnderstandingPage() {
         title={<>Understanding<br />Young Athletes</>}
         italicLine="Behind every performance is a young person."
         image="/images/understanding-hero.jpg"
-        imageAlt="A young athlete sitting alone in a locker room"
+        imageAlt="A young cricketer looking out at the field during a tense match"
       />
 
       <section className="bg-cream py-20">
@@ -252,9 +251,6 @@ export default function UnderstandingPage() {
                 <p className="text-xs uppercase tracking-[0.2em] text-white/50 mb-3">{c.chapter}</p>
                 <h3 className="font-serif text-3xl mb-4">{c.title}</h3>
                 <p className="font-serif italic text-white/80 mb-6 max-w-sm">{c.intro}</p>
-                <Link href="/get-started" className="text-sm border-b border-white/50 pb-0.5">
-                  Learn more about this chapter →
-                </Link>
               </div>
             </div>
             <ul className="divide-y divide-white/10 border-t border-white/10 md:border-t-0">

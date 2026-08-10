@@ -23,7 +23,10 @@ export function Header({ dark = true }: { dark?: boolean }) {
     <header
       className={`absolute top-0 left-0 right-0 z-30 ${dark ? "" : "relative border-b border-line bg-paper"}`}
     >
-      <Container className="flex items-center justify-between py-6">
+      {dark && (
+        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/30 to-transparent pointer-events-none" />
+      )}
+      <Container className="relative flex items-center justify-between py-6">
         <Link href="/" className="flex items-center">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
