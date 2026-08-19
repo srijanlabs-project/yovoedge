@@ -38,7 +38,7 @@ export default async function ConfirmationPage({
               <strong>1. We read every submission personally.</strong>
             </li>
             <li>
-              <strong>2. We&apos;ll reach out within 1–2 business days.</strong>
+              <strong>2. We&apos;ll reach out within 2–3 business days.</strong>
               <p className="text-muted">At the email or phone number you shared.</p>
             </li>
             <li>
@@ -52,8 +52,8 @@ export default async function ConfirmationPage({
 
           <div className="mt-10 flex flex-col md:flex-row gap-4">
             <Link href="/" className="text-sm border-b border-ink/60 pb-0.5 w-fit">← Back to home</Link>
-            <a href="mailto:hello@yovoedge.com" className="text-sm border-b border-ink/60 pb-0.5 w-fit">
-              Have a question in the meantime? hello@yovoedge.com
+            <a href="mailto:connect@yovoedge.com" className="text-sm border-b border-ink/60 pb-0.5 w-fit">
+              Have a question in the meantime? connect@yovoedge.com
             </a>
           </div>
         </Container>

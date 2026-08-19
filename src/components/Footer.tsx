@@ -32,8 +32,8 @@ export function Footer({ full = false }: { full?: boolean }) {
               <div className="hidden md:block w-px h-full bg-line" />
               <div>
                 <p className="text-sm text-muted mb-1">You can connect with us at</p>
-                <a href="mailto:hello@yovoedge.com" className="underline text-sm">
-                  hello@yovoedge.com
+                <a href="mailto:connect@yovoedge.com" className="underline text-sm">
+                  connect@yovoedge.com
                 </a>
               </div>
             </div>

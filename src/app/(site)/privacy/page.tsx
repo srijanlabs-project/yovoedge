@@ -23,7 +23,7 @@ export default function PrivacyPage() {
         YovoEdge, we are responsible for the information you share with us through the platform.
       </P>
       <P>
-        Contact: <a className="underline" href="mailto:hello@yovoedge.com">hello@yovoedge.com</a>
+        Contact: <a className="underline" href="mailto:connect@yovoedge.com">connect@yovoedge.com</a>
       </P>
 
       <H2>What we collect</H2>
@@ -96,7 +96,7 @@ export default function PrivacyPage() {
         <li>Withdraw your consent and stop sessions.</li>
       </Ul>
       <P>
-        Just email us at <a className="underline" href="mailto:hello@yovoedge.com">hello@yovoedge.com</a> and
+        Just email us at <a className="underline" href="mailto:connect@yovoedge.com">connect@yovoedge.com</a> and
         we&apos;ll take care of it.
       </P>
 
@@ -116,7 +116,7 @@ export default function PrivacyPage() {
       <H2>Questions</H2>
       <P>
         If anything here worries you or isn&apos;t clear, please just ask. We&apos;d rather over-explain than leave
-        you unsure. <a className="underline" href="mailto:hello@yovoedge.com">hello@yovoedge.com</a>
+        you unsure. <a className="underline" href="mailto:connect@yovoedge.com">connect@yovoedge.com</a>
       </P>
     </LegalPage>
   );

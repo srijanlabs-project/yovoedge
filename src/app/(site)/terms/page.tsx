@@ -129,7 +129,7 @@ export default function TermsPage() {
       <H2>10. Raising a concern</H2>
       <P>
         If you&apos;re ever unhappy, or concerned about a practitioner, a session, or anything else, tell us straight
-        away at <a href="mailto:hello@yovoedge.com" className="underline">hello@yovoedge.com</a>. We treat concerns
+        away at <a href="mailto:connect@yovoedge.com" className="underline">connect@yovoedge.com</a>. We treat concerns
         about a child&apos;s wellbeing as the most serious thing we deal with, and we&apos;ll act on them.
       </P>
 
@@ -142,7 +142,7 @@ export default function TermsPage() {
       <H2>12. Contact</H2>
       <P>
         Questions about these terms? Just ask.{" "}
-        <a href="mailto:hello@yovoedge.com" className="underline">hello@yovoedge.com</a>
+        <a href="mailto:connect@yovoedge.com" className="underline">connect@yovoedge.com</a>
       </P>
     </LegalPage>
   );

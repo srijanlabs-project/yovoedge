@@ -367,7 +367,7 @@ export default function GetStartedPage() {
               <h4 className="font-medium mb-2">What happens next?</h4>
               <ol className="space-y-3 text-muted">
                 <li><strong className="text-ink">1. We read every submission personally.</strong></li>
-                <li><strong className="text-ink">2. We&apos;ll reach out within 1–2 business days.</strong></li>
+                <li><strong className="text-ink">2. We&apos;ll reach out within 2–3 business days.</strong></li>
                 <li><strong className="text-ink">3. If we believe support could be helpful, we&apos;ll guide you through the next steps and discuss a suitable practitioner.</strong></li>
                 <li><strong className="text-ink">4. There&apos;s no obligation to continue.</strong></li>
               </ol>

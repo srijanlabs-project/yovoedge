@@ -27,13 +27,16 @@ export function Header({ dark = true }: { dark?: boolean }) {
         <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/30 to-transparent pointer-events-none" />
       )}
       <Container className="relative flex items-center justify-between py-6">
-        <Link href="/" className="flex items-center">
+        <Link href="/" className="flex flex-col items-start">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={dark ? "/logo/logo-mark-dark.png" : "/logo/logo-mark-light.png"}
             alt="YovoEdge"
             className="h-8 w-auto"
           />
+          <span className={`text-xs mt-1 ${dark ? "text-white/70" : "text-ink/60"}`}>
+            Think sharp. Play sharper.
+          </span>
         </Link>
 
         <nav className="hidden md:flex items-center gap-8 text-sm">

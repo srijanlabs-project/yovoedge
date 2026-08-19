@@ -19,8 +19,8 @@ export default function ConnectPage() {
             <p className="text-sm text-muted mb-2">
               A real person reads every message, and we&apos;ll respond personally.
             </p>
-            <a href="mailto:hello@yovoedge.com" className="underline text-lg">
-              hello@yovoedge.com
+            <a href="mailto:connect@yovoedge.com" className="underline text-lg">
+              connect@yovoedge.com
             </a>
           </div>
           <div className="bg-paper border border-line rounded-xl p-8">
