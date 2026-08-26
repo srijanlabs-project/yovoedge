@@ -106,7 +106,7 @@ export default function FindingSupportPage() {
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="/images/finding-support-chair.jpg"
-            alt="A young athlete talking with her coach courtside"
+            alt="A vase of leaves on a wooden table in soft afternoon light"
             className="h-48 w-full rounded-lg object-cover"
           />
         </Container>

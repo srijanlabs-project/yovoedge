@@ -119,7 +119,7 @@ export default function HomePage() {
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src="/images/home-cta.jpg"
-          alt="A parent walking with their young athlete along a tree-lined path"
+          alt="A young athlete talking with a counsellor over a video call"
           className="absolute inset-0 w-full h-full object-cover object-top"
         />
         <Container className="relative py-28 md:py-40">

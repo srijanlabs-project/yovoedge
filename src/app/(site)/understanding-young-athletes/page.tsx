@@ -226,7 +226,7 @@ export default function UnderstandingPage() {
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="/images/understanding-row2.jpg"
-            alt="A young athlete sitting in a sunlit room"
+            alt="A young athlete sitting alone in an empty gym"
             className="h-56 md:h-72 w-full rounded-lg object-cover"
           />
         </Container>

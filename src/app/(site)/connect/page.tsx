@@ -9,7 +9,7 @@ export default function ConnectPage() {
       <Hero
         title="Let's connect."
         italicLine="You don't have to figure this out alone."
-        description="Whatever stage you're at — just noticing something, or ready to find support — we're happy to talk it through."
+        description="Whatever stage you're at, just noticing something, or ready to find support, we're happy to talk it through."
       />
 
       <section className="bg-cream py-20">
