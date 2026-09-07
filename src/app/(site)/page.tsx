@@ -3,6 +3,7 @@ import { Hero } from "@/components/Hero";
 import { Container } from "@/components/Container";
 import { Footer } from "@/components/Footer";
 import { HomeHighlights } from "@/components/HomeHighlights";
+import { Testimonials } from "@/components/Testimonials";
 
 // All three cards share one aspect ratio so they render at identical heights
 // side by side — using each photo's own native ratio (as before) left the
@@ -114,6 +115,8 @@ export default function HomePage() {
           </Link>
         ))}
       </section>
+
+      <Testimonials />
 
       <section className="relative bg-ink text-white overflow-hidden min-h-[420px] md:min-h-[600px] flex items-center">
         {/* eslint-disable-next-line @next/next/no-img-element */}
