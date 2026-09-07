@@ -122,12 +122,12 @@ export function Testimonials() {
                 {group.map((t, ti) => (
                   <figure
                     key={`${pi}-${ti}-${t.name}`}
-                    className="bg-paper border border-line rounded-xl p-8 flex flex-col h-full"
+                    className="bg-card border border-line rounded-xl p-8 flex flex-col h-full"
                   >
                     <span aria-hidden className="font-serif text-4xl text-olive/50 leading-none mb-3">
                       &ldquo;
                     </span>
-                    <blockquote className="text-sm text-muted leading-relaxed flex-1">
+                    <blockquote className="text-sm text-muted leading-relaxed text-justify flex-1">
                       {t.quote}
                     </blockquote>
                     <figcaption className="mt-6 pt-6 border-t border-line">

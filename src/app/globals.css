@@ -6,6 +6,7 @@
   --ye-cream: #f4f1ea;
   --ye-cream-2: #ece6d8;
   --ye-paper: #faf8f3;
+  --ye-card: #fffdf8;
   --ye-olive: #55603f;
   --ye-olive-dark: #3c4530;
   --ye-line: #ded7c4;
@@ -17,6 +18,7 @@
   --color-cream: var(--ye-cream);
   --color-cream-2: var(--ye-cream-2);
   --color-paper: var(--ye-paper);
+  --color-card: var(--ye-card);
   --color-olive: var(--ye-olive);
   --color-olive-dark: var(--ye-olive-dark);
   --color-line: var(--ye-line);
